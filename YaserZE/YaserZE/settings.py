@@ -16,15 +16,15 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# ⚠️ إعدادات التطوير (لا تستخدم DEBUG=True في الإنتاج)
+# ⚠️ إعدادات التطوير (غيّرها في الإنتاج)
 SECRET_KEY = 'django-insecure-&b#=aus5b*g!!^whp6dm=68kj9mb88g(#t&tf9l#$&!hmi-=#_'
 DEBUG = True
-ALLOWED_HOSTS = []  # عدّلها عند النشر مثلاً ['yourdomain.com']
+ALLOWED_HOSTS = []  # أضف نطاقك عند النشر، مثلاً ['yourdomain.com']
 
 
 # ✅ التطبيقات المثبتة
 INSTALLED_APPS = [
-    # تطبيقات Django الافتراضية
+    # تطبيقات Django الأساسية
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # ✅ تطبيقاتك الخاصة
+    # ✅ تطبيقات المشروع
     'store',
     'orders',
     'accounts',
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # لدعم الترجمة
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -54,11 +55,11 @@ MIDDLEWARE = [
 # ✅ إعدادات المسارات
 ROOT_URLCONF = 'YaserZE.urls'
 
-# ✅ إعدادات القوالب (Templates)
+# ✅ إعدادات القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # أضف المسارات المخصصة للقوالب هنا لاحقًا
+        'DIRS': [],  # يمكنك إضافة مجلدات قوالب مخصصة لاحقًا
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,15 +92,18 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# ✅ الإعدادات العالمية
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+# ✅ اللغة والتوقيت (تعريب كامل للنظام)
+LANGUAGE_CODE = 'ar'
+TIME_ZONE = 'Asia/Riyadh'
+
 USE_I18N = True
+USE_L10N = True  # تنسيق التواريخ والأرقام حسب اللغة
 USE_TZ = True
 
 
-# ✅ الملفات الثابتة (Static files)
+# ✅ الملفات الثابتة (Static Files)
 STATIC_URL = 'static/'
 
-# 🔑 مفتاح الحقول الافتراضي
+
+# ✅ مفتاح الحقول الافتراضي
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
